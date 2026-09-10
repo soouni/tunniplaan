@@ -1,0 +1,101 @@
+<!doctype html><html lang="et"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Halliste Põhikooli tunniplaan · 2026/2027</title><style>
+:root{font-family:Inter,ui-sans-serif,system-ui,sans-serif;color:#162c42;background:#f1f5f9;font-size:16px}*{box-sizing:border-box}body{margin:0}header{height:76px;background:#102b46;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 4vw}header a{color:#dceafa;font-size:14px}.brand{font-size:24px;font-weight:800;display:flex;gap:22px;align-items:center}.brand span{font-size:14px;letter-spacing:2px;font-weight:500;color:#b6c8d9}main{max-width:1600px;margin:auto;padding:32px 4vw}.heading{display:flex;justify-content:space-between;align-items:center;gap:20px}.eyebrow{font-size:12px;letter-spacing:2px;color:#456a89;font-weight:700;margin:0 0 6px}h1{font-size:34px;letter-spacing:-1px;margin:0 0 25px}#clock{font-size:15px;color:#49647a;text-align:right}.controls{display:flex;gap:12px;align-items:end;flex-wrap:wrap;margin-bottom:18px}label{font-size:14px;font-weight:650;display:grid;gap:7px}select,input,button{font:inherit;border:1px solid #becbd7;border-radius:8px;background:white;color:#18364e;min-height:44px;padding:10px 14px}select{min-width:190px}button{cursor:pointer;font-weight:600}button:hover{background:#e5edf5}button:focus-visible,select:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #2588c9;outline-offset:3px}.views{margin-left:auto;display:flex;gap:4px}.views button[aria-pressed=true]{background:#173d60;color:white;border-color:#173d60}#status{border-left:4px solid #267ea5;background:#e0eff7;padding:13px 16px;border-radius:5px;margin:18px 0;font-size:15px}#status.warn{background:#fff1d5;border-color:#d29424}.days{display:flex;gap:8px;margin:24px 0 16px}.days button{flex:1;text-align:left;background:transparent;border-color:transparent}.days button small{display:block;font-size:13px;margin-top:4px;font-weight:400}.days button[aria-current=date]{background:#d8e8f4;color:#123c60;border-color:#93b6d1}.board{background:white;border:1px solid #d4dfe8;border-radius:12px;overflow:hidden}.board-title{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:20px 22px;border-bottom:1px solid #dce5ec}h2{font-size:20px;margin:0}.board-title span{font-size:14px;color:#52687a}.scroll{overflow:auto}table{border-collapse:separate;border-spacing:0;width:100%;font-size:14px}th,td{padding:14px 10px;border-bottom:1px solid #e4ebf1;border-right:1px solid #e4ebf1;text-align:left;min-width:126px;vertical-align:top;line-height:1.4}thead th{background:#f6f9fc;font-size:14px;color:#3c5870;padding:14px 10px}th:first-child{min-width:111px;width:111px;position:sticky;left:0;background:#f6f9fc;z-index:1}th small{display:block;font-size:13px;font-weight:400;margin-top:4px;white-space:nowrap}td small{display:block;margin-top:5px;color:#606582;font-size:12px}td.club{background:#f0ecfa;color:#49367a}td.empty{color:#8193a3}tr.now td{box-shadow:inset 0 3px #167aa6,inset 0 -3px #167aa6}tr.now th{background:#176184;color:white}tr:last-child>*{border-bottom:0}.note,footer{font-size:13px;color:#52687a;line-height:1.7}.club-key{background:#eee8fa;color:#513d7a;padding:3px 7px;border-radius:4px}#extra{font-size:14px;margin:18px 0}details{background:white;border:1px solid #d4dfe8;border-radius:12px;margin-top:24px}summary{padding:20px;cursor:pointer;font-weight:700}summary span{font-size:14px;font-weight:400;color:#597084;margin-left:15px}.calendar{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;padding:0 22px 24px}.calendar h3{font-size:16px}.event{padding:10px 0;border-top:1px solid #e1e8ef;font-size:14px}.event span{display:block;color:#5f7283;margin-top:5px}footer{margin-top:24px}@media(max-width:650px){main{padding:25px 16px}header{padding:0 16px}.heading{align-items:start}h1{font-size:28px}#clock{font-size:13px;max-width:120px}.controls{gap:10px}label{flex:1}select,input{width:100%;min-width:0}.views{margin-left:0}.days{gap:2px}.days button{padding:10px 5px;text-align:center;font-size:14px}.days button small{font-size:12px}.board-title{padding:16px;align-items:start;flex-direction:column;gap:5px}.calendar{grid-template-columns:1fr;gap:12px}summary span{display:block;margin:8px 0 0}th,td{min-width:145px}th:first-child{min-width:100px}.note{line-height:1.9}}
+
+@media(max-width:650px){.day-name{display:none}}
+
+/* Keep the current time visible in exactly one weekday cell. */
+td.current-slot{box-shadow:inset 0 0 0 3px #1676d2;background:#e6f2ff;color:#123c60}
+
+
+/* Current time is interpolated inside each lesson or recess row. */
+.timeline-table{position:relative;width:100%}
+.now-line{position:absolute;z-index:4;height:3px;background:#0869d7;pointer-events:none;transform:translateY(-50%);box-shadow:0 0 0 1px #ffffff70}
+.now-line[hidden]{display:none}
+.now-line span{position:absolute;left:8px;top:0;transform:translateY(-50%);padding:3px 7px;background:#0869d7;color:white;border:1px solid white;border-radius:5px;font-size:12px;font-weight:700;line-height:1.2;white-space:nowrap;box-shadow:0 1px 3px #14395926}
+tr.recess th,tr.recess td{height:26px;padding:4px 10px;font-size:12px;line-height:17px;background:#f1f6fa;color:#60778a;vertical-align:middle}
+tr.recess th{font-weight:400;white-space:nowrap}
+tr.now td{box-shadow:none;background:#eaf4ff}
+tr.now td.club{background:#e8edff}
+@media(prefers-reduced-motion:no-preference){.now-line{transition:top .8s linear}}
+</style><body><header><div class="brand">TP<span>2026 / 2027</span></div><a href="#" id="source-pdf" download="tunniplaan.pdf">Algne PDF ↗</a></header><main><div class="heading"><div><p class="eyebrow" id="plan-name">TUNNIPLAAN</p><h1>Halliste Põhikooli tunniplaan</h1></div><div id="clock"></div></div><section class="controls" aria-label="Tunniplaani valikud"><label>Klass<select id="class"><option value="all">Kõik klassid</option></select></label><label>Kuupäev<input type="date" id="date"></label><button id="today">Täna</button><div class="views"><button id="day" aria-pressed="true">Päev</button><button id="week" aria-pressed="false">Nädal</button></div></section><div id="status" role="status"></div><nav class="days" aria-label="Nädalapäevad" id="days"></nav><section class="board"><div class="board-title"><h2 id="title"></h2><span id="subtitle"></span></div><div class="scroll" tabindex="0" aria-label="Tunniplaan, horisontaalselt keritav"><div class="timeline-table" id="timeline-table"><table id="table"></table><div id="now-line" class="now-line" hidden aria-hidden="true"><span id="now-label"></span></div></div></div></section><p class="note">Sinine ajajoon näitab praegust Eesti aega ja liigub tunni jooksul allapoole. Vahetundides liigub see kitsal vahetunnireal. Pika ainetunni puhul toimuvad vahetund ja söömine eri aegadel. <span class="club-key">Huviring</span> on eristatud lilla taustaga. Tühjas lahtris pole PDF-is tegevust märgitud.</p><div id="extra"></div><details><summary>Õppeaasta kalender <span>Vaheajad, trimestrid ja pühad</span></summary><div class="calendar" id="calendar"></div></details><footer id="source-note"></footer></main><!--PLAN_DATA-->
+<script>
+const planData=JSON.parse(document.getElementById('plan-data').textContent);
+const schedule=planData.schedule;
+const escapeText=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const breaks=[['I vaheaeg','2026-10-26','2026-11-01'],['II vaheaeg','2026-12-21','2027-01-03'],['III vaheaeg','2027-02-22','2027-02-28'],['IV vaheaeg','2027-04-12','2027-04-18'],['Suvevaheaeg','2027-06-09','2027-08-31']];
+const terms=[['I trimester','2026-09-01','2026-11-20'],['II trimester','2026-11-24','2027-02-19'],['III trimester','2027-03-01','2027-06-08']];
+const holidays=[['Uusaasta','2027-01-01'],['Iseseisvuspäev','2027-02-24'],['Suur reede','2027-03-26'],['Kevadpüha','2027-05-01']];
+
+const $=id=>document.getElementById(id), names=['Esmaspäev','Teisipäev','Kolmapäev','Neljapäev','Reede'];
+const times=[['08:35','09:15'],['09:25','10:10'],['10:20','11:00'],['11:20','12:05'],['12:25','13:05'],['13:15','14:00'],['14:10','14:55']];
+const iso=d=>new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Tallinn'}).format(d), dateObj=s=>new Date(s+'T12:00:00'), fmt=s=>dateObj(s).toLocaleDateString('et-EE',{day:'numeric',month:'numeric',year:'numeric'}), add=(s,n)=>{let d=dateObj(s);d.setDate(d.getDate()+n);return iso(d)};
+let mode='day';$('date').value=iso(new Date());
+for(let i=1;i<=9;i++)$('class').add(new Option(i+'. klass',i-1));
+function off(s,c){if(s<'2026-09-01'||s>'2027-08-31')return 'Väljaspool 2026/2027. õppeaastat';const h=holidays.find(h=>h[1]===s);if(h)return h[0];const b=breaks.find(b=>s>=b[1]&&s<=b[2]);if(b){if(b[0]==='Suvevaheaeg'&&(c==='all'||c==='8'))return c==='8'?'Lõpuklassi suvevaheaja algus pole antud':'Suvevaheaeg (v.a lõpuklassid)';return b[0]}if([0,6].includes(dateObj(s).getDay()))return 'Nädalavahetus';return ''}
+function render(){const s=$('date').value;if(!s)return;const c=$('class').value,wd=dateObj(s).getDay(),di=wd-1,mon=add(s,wd===0?-6:1-wd),today=iso(new Date()),hh=new Intl.DateTimeFormat('et-EE',{timeZone:'Europe/Tallinn',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).format(new Date()).replace('.',':');const current=times.findIndex(t=>hh>=t[0]&&hh<t[1]);
+$('clock').textContent='Tallinn · '+today.split('-').reverse().join('.')+' · '+hh;
+const reason=off(s,c),term=terms.find(t=>s>=t[1]&&s<=t[2]);$('status').className=reason?'warn':'';
+$('status').textContent=reason?reason+' · kuvatud on tavapärane nädalaplaan, mitte selle päeva kinnitatud tegevused.':(term?term[0]:'Trimestrit pole antud kuupäeval märgitud')+' · '+(s===today?(current>=0?(current+1)+'. tund käib praegu':hh<'08:35'?'Tunnid algavad kell 8.35':hh>='14:55'?'Seitse ajastatud tundi on lõppenud':'Praegu on vahetund'):'Valitud kuupäev: '+fmt(s));
+$('days').innerHTML=names.map((n,i)=>`<button data-date="${add(mon,i)}" ${s===add(mon,i)?'aria-current="date"':''}>${n.slice(0,1)}<span class="day-name">${n.slice(1)}</span><small>${dateObj(add(mon,i)).toLocaleDateString('et-EE',{day:'numeric',month:'short'})}</small></button>`).join('');
+$('days').querySelectorAll('button').forEach(b=>b.onclick=()=>{$('date').value=b.dataset.date;render()});
+$('day').setAttribute('aria-pressed',mode==='day');$('week').setAttribute('aria-pressed',mode==='week');
+const day=di>=0&&di<5?di:0,cols=mode==='week'?names.map((n,i)=>({label:n,date:add(mon,i),d:i,c:Number(c)})):c==='all'?Array.from({length:9},(_,i)=>({label:(i+1)+'. klass',date:s,d:day,c:i})):[{label:(Number(c)+1)+'. klass',date:s,d:day,c:Number(c)}];
+$('title').textContent=mode==='week'?(Number(c)+1)+'. klass · nädal':(di<0||di>4?'Esmaspäeva näidisplaan':names[di])+' · '+(c==='all'?'kõik klassid':(Number(c)+1)+'. klass');
+$('subtitle').textContent=mode==='week'?fmt(mon)+' – '+fmt(add(mon,4)):fmt(s);
+let html='<thead><tr><th scope="col">Tund / aeg</th>'+cols.map(x=>'<th scope="col">'+x.label+(mode==='week'?'<small>'+fmt(x.date)+'</small>'+(off(x.date,c)?'<small>'+off(x.date,c)+'</small>':''):'')+'</th>').join('')+'</tr></thead><tbody>';
+for(let r=0;r<8;r++){const has=cols.some(x=>schedule[x.d]?.[r]?.[x.c]);if(r===7&&!has)continue;const now=mode==='day'&&s===today&&!reason&&r===current;html+='<tr data-lesson="'+r+'" class="'+(now?'now':'')+'"><th scope="row">'+(r+1)+'. tund<small>'+(times[r]?times[r].join('–'):'Aeg täpsustamisel')+'</small></th>';for(const x of cols){let txt=schedule[x.d]?.[r]?.[x.c]||'',club=/Rahvatants|Palliring|Loodusring|Kodutütred|Puutöö|Lauluring|Robootika|Rattaring|Mudilaskoor|Jalgpall/.test(txt);const cellNow=mode==='week'&&x.date===today&&!off(x.date,c)&&r===current;html+='<td class="'+(txt?(club?'club':''):'empty')+(cellNow?' current-slot':'')+'"'+(cellNow?' aria-current="time" title="Praegune tunniaeg"':'')+'>'+(txt?txt.includes(' · ')?escapeText(txt.slice(0,txt.indexOf(' · ')))+'<small>'+escapeText(txt.slice(txt.indexOf(' · ')+3))+'</small>':escapeText(txt):'—')+'</td>'}html+='</tr>';if(r<times.length-1){html+='<tr class="recess" data-recess="'+r+'"><th scope="row">Vahetund</th>'+cols.map((_,i)=>'<td>'+(i===0?times[r][1]+'–'+times[r+1][0]:'')+'</td>').join('')+'</tr>'}} $('table').innerHTML=html+'</tbody>';
+$('extra').textContent=planData.extraNote||'';
+requestAnimationFrame(updateNowLine);
+}
+
+function minutes(hhmm){const [h,m]=hhmm.split(':').map(Number);return h*60+m}
+function livePosition(at=new Date()){
+  const date=iso(at),selected=$('date').value,c=$('class').value;
+  if(!selected||off(date,c))return null;
+  const weekday=dateObj(date).getDay()-1;
+  if(weekday<0||weekday>4)return null;
+  if(mode==='day'&&selected!==date)return null;
+  if(mode==='week'){
+    const wd=dateObj(selected).getDay(),monday=add(selected,wd===0?-6:1-wd);
+    if(date<monday||date>add(monday,4))return null;
+  }
+  const parts=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Tallinn',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'}).formatToParts(at);
+  const values=Object.fromEntries(parts.map(p=>[p.type,p.value]));
+  const time=Number(values.hour)*60+Number(values.minute)+Number(values.second)/60;
+  for(let i=0;i<times.length;i++){
+    const start=minutes(times[i][0]),end=minutes(times[i][1]);
+    if(time>=start&&time<end)return {kind:'lesson',index:i,fraction:(time-start)/(end-start),weekday,label:values.hour+':'+values.minute};
+    if(i<times.length-1){const next=minutes(times[i+1][0]);if(time>=end&&time<next)return {kind:'recess',index:i,fraction:(time-end)/(next-end),weekday,label:values.hour+':'+values.minute};}
+  }
+  return null;
+}
+function updateNowLine(){
+  const line=$('now-line'),position=livePosition();
+  if(!position){line.hidden=true;return;}
+  const row=$('table').querySelector('[data-'+position.kind+'="'+position.index+'"]');
+  if(!row){line.hidden=true;return;}
+  const host=$('timeline-table').getBoundingClientRect(),rect=row.getBoundingClientRect();
+  const span=mode==='week'?row.cells[position.weekday+1]:$('table');
+  if(!span){line.hidden=true;return;}
+  const horizontal=span.getBoundingClientRect();
+  line.style.top=(rect.top-host.top+rect.height*position.fraction)+'px';
+  line.style.left=(horizontal.left-host.left)+'px';
+  line.style.width=horizontal.width+'px';
+  $('now-label').textContent=position.label;
+  line.hidden=false;
+}
+$('class').onchange=()=>{if($('class').value==='all')mode='day';render()};$('date').onchange=render;$('today').onclick=()=>{$('date').value=iso(new Date());render()};$('day').onclick=()=>{mode='day';render()};$('week').onclick=()=>{mode='week';if($('class').value==='all')$('class').value='0';render()};
+$('calendar').innerHTML=[['Koolivaheajad',breaks],['Trimestrid',terms],['Riigipühad 2027',holidays]].map(([title,rows])=>'<section><h3>'+title+'</h3>'+rows.map(r=>'<div class="event"><strong>'+r[0]+'</strong><span>'+fmt(r[1])+(r[2]?' – '+fmt(r[2]):'')+'</span></div>').join('')+(title==='Koolivaheajad'?'<p class="note">IV vaheaeg ei kehti 12. klassile. Suvevaheaeg ei kehti lõpuklassidele.</p>':'')+'</section>').join('');render();
+// Only rebuild the table when the minute changes; the line advances every second.
+let lastRenderedMinute=Math.floor(Date.now()/60000);
+setInterval(()=>{const minute=Math.floor(Date.now()/60000);if(minute!==lastRenderedMinute){lastRenderedMinute=minute;render();}else updateNowLine();},1000);
+window.addEventListener('resize',updateNowLine);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)render();});
+if(typeof ResizeObserver!=='undefined')new ResizeObserver(updateNowLine).observe($('table'));
+if(document.fonts)document.fonts.ready.then(updateNowLine);
+
+
+$('plan-name').textContent=planData.title;
+$('source-note').textContent='Alus: '+planData.sourceName+'. Nädalaplaan kordub kuupäevavalikus; asendustunnid ei uuene automaatselt. PDF on algfail, käsitsi parandused kajastuvad tabelis.';
+if(planData.pdfBase64){const bytes=Uint8Array.from(atob(planData.pdfBase64),c=>c.charCodeAt(0));$('source-pdf').href=URL.createObjectURL(new Blob([bytes],{type:'application/pdf'}));}else $('source-pdf').hidden=true;
+</script></body></html>

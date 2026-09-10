@@ -1,0 +1,10 @@
+import fs from 'node:fs';import {build} from 'esbuild';
+const p=JSON.parse(fs.readFileSync('package.json'));p.private=true;p.scripts={build:'node build.mjs',test:'node test-import.mjs && node test-export.mjs'};fs.writeFileSync('package.json',JSON.stringify(p,null,2)+'\n');
+const workerText={name:'worker-text',setup(b){b.onLoad({filter:/pdf\.worker\.min\.mjs$/},args=>({contents:fs.readFileSync(args.path,'utf8'),loader:'text'}))}};
+await build({entryPoints:['src/export.mjs'],outfile:'export-built.mjs',bundle:true,platform:'node',format:'esm',loader:{'.html':'text'}});
+const {exportHTML}=await import('./export-built.mjs?build='+Date.now());
+fs.mkdirSync('dist',{recursive:true});fs.writeFileSync('dist/index.html',exportHTML(JSON.parse(fs.readFileSync('src/initial.json'))));
+const bundled=await build({entryPoints:['src/editor.mjs'],bundle:true,minify:true,format:'iife',target:'es2022',platform:'browser',write:false,loader:{'.html':'text'},plugins:[workerText],external:['node:*'],legalComments:'inline'});
+let html=fs.readFileSync('src/editor.html','utf8').replace('/*BASE_CSS*/',fs.readFileSync('src/base.css','utf8')).replace('/*EDITOR_SCRIPT*/',()=>bundled.outputFiles[0].text.replace(/<\/script/gi,'<\\/script'));
+fs.writeFileSync('dist/uuenda.html',html);fs.copyFileSync('node_modules/pdfjs-dist/LICENSE','dist/PDFJS-LICENSE.txt');fs.writeFileSync('dist/.nojekyll','');
+console.log('Built index.html and uuenda.html (all code bundled, no CDN).');

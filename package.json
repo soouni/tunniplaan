@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "esbuild": "0.27.3",
+    "pdfjs-dist": "6.3.289"
+  },
+  "private": true,
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node test-import.mjs && node test-export.mjs"
+  }
+}
